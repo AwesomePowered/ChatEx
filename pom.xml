@@ -6,81 +6,44 @@
     <name>ChatEx</name>
     <inceptionYear>2015</inceptionYear>
     <version>1.7</version>
-    <description>ChatManagement plugin for Bukkit</description>  
-    
-    <distributionManagement>
-        <repository>
-            <id>AdminCMDRepo.write</id>
-            <url>${AdminCMDRepo.write.url}</url> 
-        </repository>
-    </distributionManagement>
-    
+    <description>ChatManagement plugin for Bukkit</description>
+
     <scm>
         <connection>scm:git:git@github.com:TheJeterLP/ChatEx.git</connection>
         <url>scm:git:git@github.com:TheJeterLP/ChatEx.git</url>
         <developerConnection>scm:git:git@github.com:TheJeterLP/ChatEx.git</developerConnection>
     </scm>
-           
+
     <build>
         <defaultGoal>clean install</defaultGoal>
         <finalName>${project.name}</finalName>
         <sourceDirectory>${basedir}/src/main/java/</sourceDirectory>
-        <plugins>            
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>2.1</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                        <configuration>
-                            <minimizeJar>false</minimizeJar>
-                            <artifactSet>
-                                <includes>
-                                    <include>de.TheJeterLP.Bukkit:Updater</include>                                    
-                                </includes>
-                            </artifactSet>
-                            <relocations>                               
-                                <relocation>
-                                    <pattern>de.thejeterlp.bukkit.updater</pattern>
-                                    <shadedPattern>de.JeterLP.ChatManager.update</shadedPattern>
-                                </relocation>
-                            </relocations>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+        <plugins>
         </plugins>
         <resources>
             <resource>
                 <targetPath>.</targetPath>
                 <filtering>true</filtering>
                 <directory>${basedir}/src/main/resources/</directory>
-                <includes>        
+                <includes>
                     <include>*</include>
                     <include>locales/*</include>
                 </includes>
             </resource>
-        </resources>      
+        </resources>
     </build>
     <repositories>
         <repository>
             <id>spigot-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
-        </repository> 
+        </repository>
         <repository>
             <id>vault-repo</id>
             <url>http://nexus.hc.to/content/repositories/pub_releases</url>
-        </repository> 
-        <repository>
-            <id>AdminCMDRepo.read</id>
-            <url>https://mymavenrepo.com/repo/Dn0x5WN5HvP6PyylqIxn/</url>
-        </repository>      
+        </repository>
     </repositories>
-    <dependencies>      
+
+    <dependencies>
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
@@ -104,7 +67,7 @@
             <version>1.23.3</version>
             <scope>system</scope>
             <systemPath>${basedir}/libs/PermissionsEx.jar</systemPath>
-        </dependency>  
+        </dependency>
         <dependency>
             <groupId>com.massivecraft</groupId>
             <artifactId>factions</artifactId>
@@ -119,18 +82,12 @@
             <scope>system</scope>
             <systemPath>${basedir}/libs/Factions.jar</systemPath>
         </dependency>
-        
-        <dependency>
-            <groupId>de.TheJeterLP.Bukkit</groupId>
-            <artifactId>Updater</artifactId>
-            <version>1.1.1</version>
-            <scope>compile</scope>
-        </dependency>        
     </dependencies>
+
     <properties>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-        
+
 </project>

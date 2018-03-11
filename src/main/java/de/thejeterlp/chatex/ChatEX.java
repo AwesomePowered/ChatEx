@@ -6,19 +6,21 @@ import de.thejeterlp.chatex.plugins.PermissionsPlugin;
 import de.thejeterlp.chatex.plugins.PluginManager;
 import de.thejeterlp.chatex.utils.Config;
 import de.thejeterlp.chatex.utils.Utils;
-import de.thejeterlp.bukkit.updater.Updater; 
 import java.io.File;
+import java.util.Arrays;
+import java.util.logging.Level;
+
 import org.bukkit.plugin.java.JavaPlugin;
- 
+
 /**
  * @author TheJeterLP
  */
 public class ChatEX extends JavaPlugin {
-    
+
     private static ChatEX INSTANCE;
     private static PluginManager manager;
     private CommandManager cmanager;
-    
+
     @Override
     public void onEnable() {
         try {
@@ -39,8 +41,6 @@ public class ChatEX extends JavaPlugin {
             debug("Starting Metrics/MCStats...");
             new Metrics(this).start();
             debug("Starting updater...");
-            Updater u = new Updater(this, 65863, "chatex");
-            u.search();
             getLogger().info("Successfully hooked into: " + PluginManager.getInstance().getName());
             debug("registering Listener...");
             if (!Utils.registerListener()) {
@@ -55,26 +55,26 @@ public class ChatEX extends JavaPlugin {
             getServer().getPluginManager().disablePlugin(this);
             e.printStackTrace();
         }
-        
+
     }
-    
+
     @Override
     public void onDisable() {
         getServer().getScheduler().cancelTasks(this);
         getLogger().info("is now disabled!");
     }
-    
+
     public static ChatEX getInstance() {
         return INSTANCE;
     }
-    
+
     public static PermissionsPlugin getManager() {
         return manager;
     }
-    
-    public static void debug(String message) {
+
+    public static void debug(Object... message) {
         if (!Config.DEBUG.getBoolean()) return;
         String output = "[DEBUG] " + message;
-        getInstance().getLogger().info(output);
+        getInstance().getLogger().log(Level.INFO, Arrays.toString(message));
     }
 }
